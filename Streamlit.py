@@ -74,9 +74,7 @@ result_df = pd.DataFrame([{
     "Sub Item": sub_item,
     "Harga Lusin per Unit": f"Rp{harga_jual_per_unit_lusin:,.0f}",
     "Harga Lusin by Konversi": f"Rp{harga_jual_per_konversi_lusin:,.0f}",
-    "Harga Koli per Unit": f"Rp{harga_jual_per_unit_koli:,.0f}",
     "Harga Koli by Konversi": f"Rp{harga_jual_per_konversi_koli:,.0f}",
-    "Harga Special per Unit": f"Rp{harga_jual_per_unit_special:,.0f}",
     "Harga Special by Konversi": f"Rp{harga_jual_per_konversi_special:,.0f}"
 }])
 
@@ -96,6 +94,7 @@ st.download_button(
     file_name=f"Hasil_Estimasi_{sub_item}.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
+
 
 
 
