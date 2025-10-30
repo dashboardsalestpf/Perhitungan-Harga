@@ -10,25 +10,18 @@ st.title("Estimasi Perhitungan Harga")
 @st.cache_data
 def get_data_from_google():
     with st.spinner("Getting data from Google Sheets..."):
-        # Path ke file getlink.json Anda
-        SERVICE_ACCOUNT_FILE = 'api3.json'
-
-        # Scopes yang diperlukan untuk Google Drive API
         SCOPES = ['https://www.googleapis.com/auth/drive']
 
-        # Autentikasi menggunakan service account
-        credentials = service_account.Credentials.from_service_account_file(
-                SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+        # Authenticate using Streamlit secrets instead of local JSON
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["google_service_account"], scopes=SCOPES
+        )
 
-        # Membangun layanan Google Drive API
         client = gspread.authorize(credentials)
         sheet = client.open_by_key("16j01vWUSP8T3Dt_6ZxKJvVFSMzpjYAZp10OV887ibyA")
         worksheet = sheet.worksheet('Sheet1')
 
-        # Mendapatkan semua record dari worksheet
-        master = worksheet.get_all_records()
-        master = pd.DataFrame(master)
-
+        master = pd.DataFrame(worksheet.get_all_records())
         return master
 
 if 'master' not in st.session_state:
@@ -103,3 +96,4 @@ st.download_button(
     file_name=f"Hasil_Estimasi_{sub_item}.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
+
