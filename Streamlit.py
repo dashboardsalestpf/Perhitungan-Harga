@@ -79,7 +79,7 @@ result_df = pd.DataFrame([{
 }])
 
 st.write("### 📊 Hasil Tabel")
-st.dataframe(result_df, use_container_width=True)
+st.dataframe(result_df, width='stretch')
 
 # Convert DataFrame to Excel in memory
 output = io.BytesIO()
@@ -94,6 +94,7 @@ st.download_button(
     file_name=f"Hasil_Estimasi_{sub_item}.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
+
 
 
 
